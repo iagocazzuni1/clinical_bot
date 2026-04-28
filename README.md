@@ -1,5 +1,10 @@
 # Bot de Clínica — Sofia
 
+![Python](https://img.shields.io/badge/Python-3.11-blue)
+![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4o-green)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-teal)
+![Twilio](https://img.shields.io/badge/Twilio-WhatsApp-red)
+
 Assistente virtual para clínicas médicas via WhatsApp. A Sofia atende pacientes, agenda consultas no Google Calendar, cancela agendamentos e realiza triagem de sintomas com classificação de urgência.
 
 ---
@@ -155,6 +160,16 @@ Para instalar o bot para um novo cliente, atualize no `.env`:
 E em `app/agent.py`, atualize o `SYSTEM_PROMPT` com o nome da assistente e da clínica.
 
 Para produção, substitua o ngrok por um servidor real (VPS, Railway, Render, etc.).
+
+---
+
+## Decisões técnicas
+
+**FastAPI em vez de Flask** — FastAPI oferece validação automática de dados via Pydantic, suporte nativo a async e geração automática de documentação OpenAPI. Para um webhook que precisa processar requisições do Twilio com campos tipados, isso reduz boilerplate e torna o código mais seguro por padrão.
+
+**OpenAI em vez de Anthropic** — O GPT-4o-mini oferece uma relação custo-benefício superior para casos de uso conversacionais de alto volume, com latência baixa e custo por token significativamente menor. Para um bot de atendimento que pode receber dezenas de mensagens por dia por clínica, o custo operacional é um fator crítico.
+
+**Memória em dicionário em vez de Redis** — Para o escopo atual, um dicionário Python em memória é suficiente e elimina a necessidade de infraestrutura adicional. A troca para Redis é trivial quando necessário (persistência entre reinicializações, múltiplas instâncias), mas introduzir essa dependência prematuramente adicionaria complexidade sem benefício real neste estágio.
 
 ---
 
