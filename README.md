@@ -9,6 +9,12 @@ Assistente virtual para clínicas médicas via WhatsApp. A Sofia atende paciente
 
 ---
 
+## Demo
+
+![Demo do bot](docs/demo.gif)
+
+---
+
 ## Funcionalidades
 
 - **Agendamento de consultas** — coleta nome, especialidade, data/hora e telefone, e cria evento no Google Calendar
